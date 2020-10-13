@@ -22,6 +22,8 @@ connection.once('open', () => {
 
 const linkRouter = require('./routes/link')
 app.use('/v1', linkRouter)
+const binsRouter = require('./routes/bin')
+app.use('/v1', binsRouter)
 //docker
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
