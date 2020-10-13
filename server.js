@@ -22,7 +22,7 @@ connection.once('open', () => {
 
 const linkRouter = require('./routes/link')
 app.use('/v1', linkRouter)
-
+//docker
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
 })
