@@ -24,6 +24,8 @@ const linkRouter = require('./routes/link')
 app.use('/v1', linkRouter)
 const binsRouter = require('./routes/bin')
 app.use('/v1', binsRouter)
+const archiveRouter = require('./routes/archive')
+app.use('/v1', archiveRouter)
 //docker
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
