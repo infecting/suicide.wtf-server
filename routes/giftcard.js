@@ -12,7 +12,7 @@ router.post('/giftcard', async (req, res) => {
             for (let i = 0; i < cards.length; i++) {
                 const url = `https://giftcard.golfnow.com/api/checkBalance?number=${cards[i]}`
                 let response = await axios.get(url)
-                if (parseInt(response.data.balance) < 0.01) {
+                if (response.data.balance.includes('0.00')) {
                     console.log("INVALID")
                 } else {
                     let obj = { number: cards[i], balance: response.data.balance, cvv: response.data.cvv, createdAt: response.data.created }
