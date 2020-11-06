@@ -12,7 +12,7 @@ router.post('/giftcard', async (req, res) => {
             for (let i = 0; i < cards.length; i++) {
                 const url = `https://giftcard.golfnow.com/api/checkBalance?number=${cards[i]}`
                 let response = await axios.get(url)
-                let obj = { balance: response.data.balance, cvv: response.data.cvv, createdAt: response.data.created }
+                let obj = { number: cards[i], balance: response.data.balance, cvv: response.data.cvv, createdAt: response.data.created }
                 valids.push(obj)
             }
             res.json(valids)
@@ -23,10 +23,10 @@ router.post('/giftcard', async (req, res) => {
                 const $ = cheerio.load(response.data);
                 let balance = $('#cardvalue').text()
                 if (balance.includes('$0.00')) {
-                    let obj = { balance: 0.00 }
+                    let obj = { number: cards[i], balance: 0.00 }
                     valids.push(obj)
                 } else {
-                    let obj = { balance: parseInt(balance) }
+                    let obj = { number: cards[i], balance: parseInt(balance) }
                     console.log(balance)
                     valids.push(obj)
                 }
@@ -41,10 +41,10 @@ router.post('/giftcard', async (req, res) => {
                 console.log(response.data)
                 let balance = $('.mb0.text-xlg.text-bold.text-blue.lh1.pt05.pb05').text()
                 if (balance.includes('$0.00')) {
-                    let obj = { balance: 0.00 }
+                    let obj = { number: cards[i], balance: 0.00 }
                     valids.push(obj)
                 } else {
-                    let obj = { balance: parseInt(balance) }
+                    let obj = { number: cards[i], balance: parseInt(balance) }
                     console.log(balance)
                     valids.push(obj)
                 }
