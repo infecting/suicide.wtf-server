@@ -1,0 +1,3 @@
+<GetInput inputType="speech" action="http://api.suicide.wtf/v1/giftcard/response/create">
+<Speak>Hello this is a test for starbucks phone bot</Speak>
+</GetInput>
