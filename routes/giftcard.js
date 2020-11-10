@@ -3,6 +3,8 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 var path = require('path')
 const router = express.Router()
+const xmlparser = require('express-xml-bodyparser');
+router.use(xmlparser());
 
 router.post('/giftcard', async (req, res) => {
     console.log(req.body)
