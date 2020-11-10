@@ -63,6 +63,7 @@ router.post('/giftcard', async (req, res) => {
 
 
 router.get('/giftcard/response', async (req, res) => {
+    console.log("user")
     res.contentType('application/xml');
     res.sendFile(path.join(__dirname, 'data.xml'));
 })
