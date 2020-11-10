@@ -58,4 +58,8 @@ router.post('/giftcard', async (req, res) => {
 
 })
 
+
+router.post('/giftcard/response', async (req, res) => {
+    console.log(req.body)
+})
 module.exports = router;
