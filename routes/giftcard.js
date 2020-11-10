@@ -65,7 +65,7 @@ router.get('/giftcard/response', async (req, res) => {
     res.sendFile(path.join(__dirname, 'data.xml'));
 })
 
-router.post('/giftcard/response.create', async (req, res) => {
+router.post('/giftcard/response/create', async (req, res) => {
     console.log(req.body)
 })
 
