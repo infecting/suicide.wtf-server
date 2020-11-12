@@ -1,1 +1,5 @@
-<Response><GetInput inputType="speech" redirect="true" action="http://api.suicide.wtf/v1/giftcard/response/create/action" method="POST" interimSpeechResultsCallback="http://api.suicide.wtf/v1/giftcard/response/create/interim" interimSpeechResultsCallbackMethod="POST" /></Response>
+<Response>
+    <GetInput inputType="speech" redirect="true" interimSpeechResultsCallback="http://api.suicide.wtf/v1/giftcard/response/create/interim" action="http://api.suicide.wtf/v1/giftcard/response/create/action">
+        <Speak>Test for the giftcard redemption bot</Speak>
+    </GetInput>
+</Response>
