@@ -69,15 +69,17 @@ router.get('/giftcard/response', async (req, res) => {
 })
 
 router.post('/giftcard/response/create/interim', async (req, res) => {
-    console.log("BODY")
-    console.log(req.body)
-    res.send("Hello there")
+    console.log("interim")
+    console.log(req)
+    res.contentType('application/xml');
+    res.sendFile(path.join(__dirname, 'response.xml'));
 })
 
 router.post('/giftcard/response/create/action', async (req, res) => {
-    console.log("BODY")
-    console.log(req.body)
-    res.send("Hello there")
+    console.log("action")
+    console.log(req)
+    res.contentType('application/xml');
+    res.sendFile(path.join(__dirname, 'response.xml'));
 })
 
 module.exports = router;
