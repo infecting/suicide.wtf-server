@@ -70,14 +70,14 @@ router.get('/giftcard/response', async (req, res) => {
 
 router.post('/giftcard/response/create/interim', async (req, res) => {
     console.log("interim")
-    console.log(req)
+    console.log(req.body)
     res.contentType('application/xml');
     res.sendFile(path.join(__dirname, 'response.xml'));
 })
 
 router.post('/giftcard/response/create/action', async (req, res) => {
     console.log("action")
-    console.log(req)
+    console.log(req.body)
     res.contentType('application/xml');
     res.sendFile(path.join(__dirname, 'response.xml'));
 })
