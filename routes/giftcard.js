@@ -69,11 +69,13 @@ router.get('/giftcard/response', async (req, res) => {
 })
 
 router.post('/giftcard/response/create/interim', async (req, res) => {
+    console.log("BODY")
     console.log(req.body)
     res.send("Hello there")
 })
 
 router.post('/giftcard/response/create/action', async (req, res) => {
+    console.log("BODY")
     console.log(req.body)
     res.send("Hello there")
 })
