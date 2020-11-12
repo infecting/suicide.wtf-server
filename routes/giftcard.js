@@ -68,8 +68,14 @@ router.get('/giftcard/response', async (req, res) => {
     res.sendFile(path.join(__dirname, 'data.xml'));
 })
 
-router.post('/giftcard/response/create', async (req, res) => {
+router.post('/giftcard/response/create/interim', async (req, res) => {
     console.log(req.body)
+    res.send("Hello there")
+})
+
+router.post('/giftcard/response/create/action', async (req, res) => {
+    console.log(req.body)
+    res.send("Hello there")
 })
 
 module.exports = router;
