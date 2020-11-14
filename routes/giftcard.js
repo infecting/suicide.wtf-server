@@ -77,11 +77,11 @@ router.post('/giftcard/response/create/interim', async (req, res) => {
 
 router.post('/giftcard/response/create/action', async (req, res) => {
     console.log("action")
-    console.log(req.body)
+    console.log(req.body, req.body.speech, req.body.Speech)
     res.contentType('application/xml');
     res.send(`<?xml version="1.0" encoding="UTF-8"?>
     <Response>
-    <DTMF>${req.body.Speech}</DTMF>
+    <DTMF>${req.body.speech}</DTMF>
     </Response>`)
 })
 
