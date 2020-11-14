@@ -77,9 +77,12 @@ router.post('/giftcard/response/create/interim', async (req, res) => {
 
 router.post('/giftcard/response/create/action', async (req, res) => {
     console.log("action")
-    console.log(req)
+    console.log(req.body.Speech, req.body.CallUUID)
     res.contentType('application/xml');
-    res.sendFile(path.join(__dirname, 'response.xml'));
+    res.send(`<?xml version="1.0" encoding="UTF-8"?>
+    <Response>
+    <DTMF>${req.body.Speech}</DTMF>
+    </Response>`)
 })
 
 module.exports = router;
