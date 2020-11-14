@@ -63,26 +63,33 @@ router.post('/giftcard', async (req, res) => {
 
 
 router.get('/giftcard/response', async (req, res) => {
-    console.log("user")
+    console.log(req, req.body)
     res.contentType('application/xml');
     res.sendFile(path.join(__dirname, 'data.xml'));
 })
 
-router.post('/giftcard/response/create/interim', async (req, res) => {
-    console.log("interim")
-    console.log(req)
+router.post('/giftcard/response/captcha', async (req, res) => {
+    console.log("action")
+    console.log(req.body)
     res.contentType('application/xml');
-    res.sendFile(path.join(__dirname, 'response.xml'));
+    res.send(`
+    <?xml version="1.0" encoding="UTF-8"?>
+        <Response>
+            <DTMF>${parseInt(req.body.Speech)}</DTMF>
+        </Response>`
+    )
 })
 
 router.post('/giftcard/response/create/action', async (req, res) => {
     console.log("action")
     console.log(req.body.Speech)
     res.contentType('application/xml');
-    res.send(`<?xml version="1.0" encoding="UTF-8"?>
-    <Response>
-    <DTMF>${req.body.Speech}</DTMF>
-    </Response>`)
+    res.send(`
+    <?xml version="1.0" encoding="UTF-8"?>
+        <Response>
+            <DTMF>${parseInt(req.body.Speech)}</DTMF>
+        </Response>`
+    )
 })
 
 module.exports = router;
