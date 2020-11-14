@@ -2,7 +2,9 @@ const express = require('express');
 const axios = require('axios')
 const cheerio = require('cheerio')
 var path = require('path')
+var bodyParser = require('body-parser')
 const router = express.Router()
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.post('/giftcard', async (req, res) => {
     console.log(req.body)
