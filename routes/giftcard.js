@@ -77,7 +77,7 @@ router.post('/giftcard/response/create/interim', async (req, res) => {
 
 router.post('/giftcard/response/create/action', async (req, res) => {
     console.log("action")
-    console.log(req.body.Speech, req.body.CallUUID)
+    console.log(req.body)
     res.contentType('application/xml');
     res.send(`<?xml version="1.0" encoding="UTF-8"?>
     <Response>
