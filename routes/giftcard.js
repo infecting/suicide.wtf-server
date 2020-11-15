@@ -69,7 +69,9 @@ router.get('/giftcard/response', async (req, res) => {
 
 router.post('/giftcard/response/captcha', async (req, res) => {
     console.log("action")
-    console.log(req.body.StableSpeech, req.body.UnstableSpeech)
+    console.log(` <Response>
+    <DTMF>${parseInt(req.body.UnstableSpeech)}</DTMF>
+</Response>`)
     res.contentType('application/xml');
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
@@ -80,8 +82,9 @@ router.post('/giftcard/response/captcha', async (req, res) => {
 })
 
 router.post('/giftcard/response/create/action', async (req, res) => {
-    console.log("action")
-    console.log(req.body.Speech, parseInt(req.body.Speech))
+    console.log(` <Response>
+    <DTMF>${parseInt(req.body.UnstableSpeech)}</DTMF>
+</Response>`)
     res.contentType('application/xml');
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
