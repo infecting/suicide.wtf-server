@@ -70,7 +70,7 @@ router.get('/giftcard/response', async (req, res) => {
 
 router.post('/giftcard/response/captcha', async (req, res) => {
     console.log("action")
-    console.log(req.body)
+    console.log(req.body.StableSpeech)
     res.contentType('application/xml');
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
