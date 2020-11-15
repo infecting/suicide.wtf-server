@@ -83,7 +83,7 @@ router.post('/giftcard/response/captcha', async (req, res) => {
 
 router.post('/giftcard/response/create/action', async (req, res) => {
     console.log(` <Response>
-    <DTMF>${parseInt(req.body.UnstableSpeech)}</DTMF>
+    <DTMF>${parseInt(req.body.Speech)}</DTMF>
 </Response>`)
     res.contentType('application/xml');
     res.send(`

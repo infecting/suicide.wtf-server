@@ -2,4 +2,5 @@
 <Response>
 <Wait length="30"/>
 <GetInput inputType="speech" redirect="true" action="https://api.suicide.wtf/v1/giftcard/response/create/action"  method="POST" interimSpeechResultsCallback="https://api.suicide.wtf/v1/giftcard/response/captcha"/>
+<Wait length="10"/>
 </Response>
