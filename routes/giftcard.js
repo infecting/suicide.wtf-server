@@ -63,19 +63,18 @@ router.post('/giftcard', async (req, res) => {
 
 
 router.get('/giftcard/response', async (req, res) => {
-    console.log(req, req.body)
     res.contentType('application/xml');
     res.sendFile(path.join(__dirname, 'data.xml'));
 })
 
 router.post('/giftcard/response/captcha', async (req, res) => {
     console.log("action")
-    console.log(req.body.StableSpeech)
+    console.log(req.body.StableSpeech, req.body.UnstableSpeech)
     res.contentType('application/xml');
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <DTMF>${parseInt(req.body.Speech)}</DTMF>
+            <DTMF>${parseInt(req.body.UnstableSpeech)}</DTMF>
         </Response>`
     )
 })
