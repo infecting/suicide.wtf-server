@@ -76,7 +76,7 @@ router.post('/giftcard/response/captcha', async (req, res) => {
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <DTMF>${parseInt(req.body.UnstableSpeech)}</DTMF>
+            <DTMF>123</DTMF>
         </Response>`
     )
 })
@@ -90,6 +90,7 @@ router.post('/giftcard/response/create/action', async (req, res) => {
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
             <DTMF>123</DTMF>
+            <Wait length="3"/>
         </Response>`
     )
 })
