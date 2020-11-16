@@ -89,7 +89,7 @@ router.post('/giftcard/response/create/action', async (req, res) => {
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <DTMF>123</DTMF>
+            <DTMF>${parseInt(req.body.Speech)}</DTMF>
             <Wait length="3"/>
         </Response>`
     )
