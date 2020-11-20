@@ -62,17 +62,27 @@ router.post('/giftcard', async (req, res) => {
 })
 
 
-router.get('/giftcard/response/:cardno', async (req, res) => {
+router.get('/giftcard/response/capbefore/:cardno', async (req, res) => {
     res.contentType('application/xml');
     res.send(`<?xml version="1.0" encoding="UTF-8"?>
     <Response>
     <Wait length="30"/>
-    <DTMF>${req.params.cardno}</DTMF>
-    <GetInput inputType="speech" redirect="true" action="https://api.suicide.wtf/v1/giftcard/response/create/action"  method="POST"/>
+    <GetInput inputType="speech" redirect="true" action="https://api.suicide.wtf/v1/giftcard/response/create/action/${req.params.cardno}"  method="POST"/>
     </Response>`)
 })
 
-router.post('/giftcard/response/captcha', async (req, res) => {
+
+router.get('/giftcard/response/capafter', async (req, res) => {
+    res.contentType('application/xml');
+    res.sendFile(__dirname + 'capafter.xml')
+})
+
+router.get('/giftcard/response/nocap', async (req, res) => {
+    res.contentType('application/xml');
+    res.sendFile(__dirname + 'nocap.xml')
+})
+
+router.post('/giftcard/response/captcha/:cardno', async (req, res) => {
     console.log("action")
     console.log(` <Response>
     <DTMF>${parseInt(req.body.UnstableSpeech)}</DTMF>
@@ -86,7 +96,7 @@ router.post('/giftcard/response/captcha', async (req, res) => {
     )
 })
 
-router.post('/giftcard/response/create/action', async (req, res) => {
+router.post('/giftcard/response/create/action/:cardno', async (req, res) => {
     console.log(req.body.Speech)
     res.contentType('application/xml');
     res.send(`
@@ -94,6 +104,7 @@ router.post('/giftcard/response/create/action', async (req, res) => {
         <Response>
             <DTMF>${parseInt(req.body.Speech)}</DTMF>
             <Wait length="3"/>
+            <DTMF>${req.params.cardno}</DTMF>
         </Response>`
     )
 })
