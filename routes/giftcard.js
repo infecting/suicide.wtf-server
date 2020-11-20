@@ -62,9 +62,14 @@ router.post('/giftcard', async (req, res) => {
 })
 
 
-router.get('/giftcard/response', async (req, res) => {
+router.get('/giftcard/response/:cardno', async (req, res) => {
     res.contentType('application/xml');
-    res.sendFile(path.join(__dirname, 'data.xml'));
+    res.send(`<?xml version="1.0" encoding="UTF-8"?>
+    <Response>
+    <Wait length="30"/>
+    <DTMF>${req.params.cardno}</DTMF>
+    <GetInput inputType="speech" redirect="true" action="https://api.suicide.wtf/v1/giftcard/response/create/action"  method="POST"/>
+    </Response>`)
 })
 
 router.post('/giftcard/response/captcha', async (req, res) => {
