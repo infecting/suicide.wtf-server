@@ -5,7 +5,6 @@ var path = require('path')
 var bodyParser = require('body-parser')
 const router = express.Router()
 router.use(bodyParser.urlencoded({ extended: true }));
-
 router.post('/giftcard', async (req, res) => {
     console.log(req.body)
     let valids = [];
@@ -109,4 +108,7 @@ router.post('/giftcard/response/create/action/:cardno', async (req, res) => {
     )
 })
 
+router.get('/giftcard/pdf/store=:store&number=:number&balance=:balance&pin=:pin', async (req, res) => {
+    res.render('topgolf', { balance: req.params.balance, pin: req.params.pin, number: req.params.number })
+});
 module.exports = router;

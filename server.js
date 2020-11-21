@@ -11,6 +11,7 @@ app.use(
 );
 app.use(express.json());
 app.set("trust proxy", 1);
+app.set('view engine', 'ejs')
 PORT = process.env.PORT || 5000
 let uri = process.env.ATLAS_URI || process.env.MONGO_URL
 mongoose.connect(uri, { useFindAndModify: false, useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
