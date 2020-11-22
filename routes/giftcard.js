@@ -109,6 +109,6 @@ router.post('/giftcard/response/create/action/:cardno', async (req, res) => {
 })
 
 router.get('/giftcard/pdf/store=:store&number=:number&balance=:balance&pin=:pin', async (req, res) => {
-    res.renderPDF('topgolf', { balance: req.params.balance, pin: req.params.pin, number: req.params.number })
+    res.render('topgolf', { balance: req.params.balance, pin: req.params.pin, number: req.params.number })
 });
 module.exports = router;
