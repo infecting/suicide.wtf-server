@@ -122,8 +122,7 @@ router.post('/giftcard/download', async (req, res) => {
             'Authorization': 'Token: api_7C1E9098F87143E584DC2BB4B6BDF013',
         },
         json: {
-            'url': req.body.url,
-            'viewportWidth': 1200
+            'url': req.body.url
         }
     };
     let date = Date.now()
