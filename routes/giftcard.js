@@ -3,6 +3,9 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 var path = require('path')
 var bodyParser = require('body-parser')
+const request = require('request');
+const fs = require('fs');
+let FileDownload = require('js-file-download');
 const router = express.Router()
 router.use(bodyParser.urlencoded({ extended: true }));
 router.post('/giftcard', async (req, res) => {
@@ -111,4 +114,38 @@ router.post('/giftcard/response/create/action/:cardno', async (req, res) => {
 router.get('/giftcard/pdf/store=:store&number=:number&balance=:balance&pin=:pin', async (req, res) => {
     res.render('topgolf', { balance: req.params.balance, pin: req.params.pin, number: req.params.number })
 });
+
+router.post('/giftcard/download', async (req, res) => {
+    var opts = {
+        uri: 'https://api.sejda.com/v2/html-pdf',
+        headers: {
+            'Authorization': 'Token: api_7C1E9098F87143E584DC2BB4B6BDF013',
+        },
+        json: {
+            'url': req.body.url,
+            'viewportWidth': 1200
+        }
+    };
+
+    request.post(opts)
+        .on('error', function (err) {
+            return console.error(err);
+        })
+        .on('response', function (response) {
+            if (response.statusCode === 200) {
+                response.pipe(fs.createWriteStream(__dirname + `/tmp/${Date.now()}_out.pdf`))
+                    .on('finish', function () {
+                        console.log('PDF saved to disk');
+                        res.json(`${Date.now()}_out.pdf`)
+                    });
+            } else {
+                return console.error('Got code: ' + response.statusCode);
+            }
+        });
+
+})
+
+router.get('/giftcard/pdf/get/:file', (req, res) => {
+    res.sendFile(__dirname + `/tmp/${req.params.file}`)
+})
 module.exports = router;
