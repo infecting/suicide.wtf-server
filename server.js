@@ -1,8 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
+const pdfRenderer = require('@ministryofjustice/express-template-to-pdf')
 require('dotenv').config();
 const app = express()
+app.use(pdfRenderer())
 app.use(
     cors({
         credentials: true,
@@ -12,6 +15,7 @@ app.use(
 app.use(express.json());
 app.set("trust proxy", 1);
 app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'))
 PORT = process.env.PORT || 5000
 let uri = process.env.ATLAS_URI || process.env.MONGO_URL
 mongoose.connect(uri, { useFindAndModify: false, useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
