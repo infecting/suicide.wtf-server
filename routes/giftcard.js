@@ -126,17 +126,17 @@ router.post('/giftcard/download', async (req, res) => {
             'viewportWidth': 1200
         }
     };
-
+    let date = Date.now()
     request.post(opts)
         .on('error', function (err) {
             return console.error(err);
         })
         .on('response', function (response) {
             if (response.statusCode === 200) {
-                response.pipe(fs.createWriteStream(__dirname + `/tmp/${Date.now()}_out.pdf`))
+                response.pipe(fs.createWriteStream(__dirname + `/tmp/${date}_out.pdf`))
                     .on('finish', function () {
                         console.log('PDF saved to disk');
-                        res.json(`${Date.now()}_out.pdf`)
+                        res.json(`${date}_out.pdf`)
                     });
             } else {
                 return console.error('Got code: ' + response.statusCode);
@@ -145,7 +145,7 @@ router.post('/giftcard/download', async (req, res) => {
 
 })
 
-router.get('/giftcard/pdf/get/:file', (req, res) => {
+router.get('/giftcard/pdf/:file', (req, res) => {
     res.sendFile(__dirname + `/tmp/${req.params.file}`)
 })
 module.exports = router;
