@@ -111,8 +111,33 @@ router.post('/giftcard/response/create/action/:cardno', async (req, res) => {
     )
 })
 
-router.get('/giftcard/pdf/store=:store&number=:number&balance=:balance&pin=:pin', async (req, res) => {
-    res.render('topgolf', { balance: req.params.balance, pin: req.params.pin, number: req.params.number })
+router.get('/giftcard/pdf/pin/store=:store&number=:number&balance=:balance&pin=:pin', async (req, res) => {
+    if (!req.params.pin) {
+        req.params.pin === 123
+    }
+    switch (req.params.store) {
+        case 'topgolf':
+            res.render('topgolf', { balance: req.params.balance, pin: req.params.pin, number: req.params.number })
+        case 'jamba':
+            res.render('jamba', { balance: req.params.balance, pin: req.params.pin, number: req.params.number })
+    }
+
+});
+function between(min, max) {
+    return Math.floor(
+        Math.random() * (max - min) + min
+    )
+}
+router.get('/giftcard/pdf/nopin/store=:store&number=:number&balance=:balance', async (req, res) => {
+    if (!req.params.pin) {
+        req.params.pin === 123
+    }
+    switch (req.params.store) {
+        case 'nopinstore':
+            res.render('nopinstore', { balance: req.params.balance, pin: between(100, 999), number: req.params.number })
+        //depending on pin length modify the between function
+    }
+
 });
 
 router.post('/giftcard/download', async (req, res) => {
