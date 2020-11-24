@@ -9,7 +9,7 @@ router.get('/giftcard/response/capbefore/:cardno', async (req, res) => {
     res.contentType('application/xml');
     res.send(`<?xml version="1.0" encoding="UTF-8"?>
     <Response>
-    <Wait length="20"/>
+    <Wait length="15"/>
     <GetInput inputType="speech" redirect="true" action="https://api.suicide.wtf/v1/giftcard/response/create/before/${req.params.cardno}"  method="POST"/>
     </Response>`)
 })
