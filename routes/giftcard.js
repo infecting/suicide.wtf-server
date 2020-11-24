@@ -27,6 +27,9 @@ router.get('/giftcard/response/nocap', async (req, res) => {
 
 router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
     console.log(`
+    SPEECH:
+    ${req.body.Speech},
+    
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
             <DTMF>${parseInt(req.body.Speech)}WWWWWW1</DTMF>
