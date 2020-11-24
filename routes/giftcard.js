@@ -29,10 +29,14 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
     console.log(`
     SPEECH:
     ${req.body.Speech},
-    
+
+    CODE:
+    ${parseInt(req.body.Speech)}
+        
+
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <DTMF>${parseInt(req.body.Speech)}WWWWWW1</DTMF>
+            <DTMF>${parseInt(req.body.Speech).toString()}WWWWWW1</DTMF>
             <Wait length="10"/>
             <DTMF>${req.params.cardno}#</DTMF>
             <Wait length="15"/>
