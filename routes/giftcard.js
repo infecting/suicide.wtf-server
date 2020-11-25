@@ -41,7 +41,8 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
         <Response>
             <DTMF>${code}WWWWWW1</DTMF>
             <Wait length="10"/>
-            <DTMF>${req.params.cardno}#WWWWWWWWWWWWWW</DTMF>
+            <DTMF>${req.params.cardno}#</DTMF>
+            <Wait length="22"/>
         </Response>`
     )
 })
