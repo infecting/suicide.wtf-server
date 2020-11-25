@@ -26,17 +26,11 @@ router.get('/giftcard/response/nocap', async (req, res) => {
 })
 
 router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
+    let code = parseInt(req.body.Speech.replace(/^\D+|\D+$/g, ""))
     console.log(`
-    SPEECH:
-    ${req.body.Speech},
-
-    CODE:
-    ${parseInt(req.body.Speech)}
-        
-
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <DTMF>${parseInt(req.body.Speech).toString()}WWWWWW1</DTMF>
+            <DTMF>${code}WWWWWW1</DTMF>
             <Wait length="10"/>
             <DTMF>${req.params.cardno}#</DTMF>
             <Wait length="15"/>
@@ -45,7 +39,7 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <DTMF>${parseInt(req.body.Speech)}WWWWWW1</DTMF>
+            <DTMF>${code}WWWWWW1</DTMF>
             <Wait length="10"/>
             <DTMF>${req.params.cardno}#</DTMF>
             <Wait length="15"/>
