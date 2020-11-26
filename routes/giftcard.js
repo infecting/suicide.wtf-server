@@ -47,7 +47,7 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
     )
 })
 
-router.post('/giftcard/response/create/after/:cardno', async (req, res) => {
+router.post('/giftcard/response/create/after', async (req, res) => {
     console.log(req.body.Speech)
     res.contentType('application/xml');
     res.send(`
