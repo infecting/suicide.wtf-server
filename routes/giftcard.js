@@ -49,11 +49,12 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
 
 router.post('/giftcard/response/create/after', async (req, res) => {
     console.log(req.body.Speech)
+    let code = parseInt(req.body.Speech.replace(/^\D+|\D+$/g, ""))
     res.contentType('application/xml');
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-            <DTMF>${parseInt(req.body.Speech)}</DTMF>
+            <DTMF>${code}</DTMF>
             <Wait length="7"/>
         </Response>`
     )
