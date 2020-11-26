@@ -17,12 +17,12 @@ router.get('/giftcard/response/capbefore/:cardno', async (req, res) => {
 
 router.get('/giftcard/response/capafter', async (req, res) => {
     res.contentType('application/xml');
-    res.sendFile(__dirname + 'capafter.xml')
+    res.sendFile(__dirname + '/capafter.xml')
 })
 
 router.get('/giftcard/response/nocap', async (req, res) => {
     res.contentType('application/xml');
-    res.sendFile(__dirname + 'nocap.xml')
+    res.sendFile(__dirname + '/nocap.xml')
 })
 
 router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
