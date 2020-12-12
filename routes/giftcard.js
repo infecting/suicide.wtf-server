@@ -27,7 +27,7 @@ router.get('/giftcard/response/nocap', async (req, res) => {
     res.sendFile(__dirname + '/nocap.xml')
 })
 
-router.post('/giftcard/response/create/before/:cardno/:store', async (req, res) => {
+router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
     let code = parseInt(req.body.Speech.replace(/^\D+|\D+$/g, ""))
     console.log(req.body.Speech)
     res.contentType('application/xml');
