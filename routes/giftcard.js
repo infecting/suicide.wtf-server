@@ -31,9 +31,7 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
     let code = parseInt(req.body.Speech.replace(/^\D+|\D+$/g, ""))
     console.log(req.body.Speech)
     res.contentType('application/xml');
-    switch (store) {
-        case 'starbucks':
-            res.send(`
+    res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
             <DTMF>${code}WWWWWW1</DTMF>
@@ -41,12 +39,10 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
             <DTMF>${req.params.cardno}#</DTMF>
             <Wait length="22"/>
         </Response>`
-            )
-        case 'dunkin':
-
-    }
+    )
 
 })
+
 
 router.post('/giftcard/response/create/after', async (req, res) => {
     console.log(req.body.Speech)
