@@ -27,11 +27,13 @@ router.get('/giftcard/response/nocap', async (req, res) => {
     res.sendFile(__dirname + '/nocap.xml')
 })
 
-router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
+router.post('/giftcard/response/create/before/:cardno/:store', async (req, res) => {
     let code = parseInt(req.body.Speech.replace(/^\D+|\D+$/g, ""))
     console.log(req.body.Speech)
     res.contentType('application/xml');
-    res.send(`
+    switch (store) {
+        case 'starbucks':
+            res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
         <Response>
             <DTMF>${code}WWWWWW1</DTMF>
@@ -39,7 +41,11 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
             <DTMF>${req.params.cardno}#</DTMF>
             <Wait length="22"/>
         </Response>`
-    )
+            )
+        case 'dunkin':
+
+    }
+
 })
 
 router.post('/giftcard/response/create/after', async (req, res) => {
@@ -62,7 +68,11 @@ router.post('/giftcard/user/check', async (req, res) => {
             hwid: req.body.hwid,
             ip: req.connection.remoteAddress
         })
-        res.json({ authenticated: true })
+        if (req.body.user === 'whirlpool') {
+            res.json({ authenticated: false, message: "leave a vouch lol" })
+        } else {
+            res.json({ authenticated: true })
+        }
     } catch (e) {
         res.json({ error: e, authenticated: false })
     }
