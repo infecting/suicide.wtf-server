@@ -64,11 +64,7 @@ router.post('/giftcard/user/check', async (req, res) => {
             hwid: req.body.hwid,
             ip: req.connection.remoteAddress
         })
-        if (req.body.user === 'whirlpool') {
-            res.json({ authenticated: false, message: "leave a vouch lol" })
-        } else {
-            res.json({ authenticated: true })
-        }
+        res.json({ authenticated: true })
     } catch (e) {
         res.json({ error: e, authenticated: false })
     }
