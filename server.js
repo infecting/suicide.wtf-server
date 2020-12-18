@@ -29,6 +29,8 @@ const archiveRouter = require('./routes/archive')
 app.use('/v1', archiveRouter)
 const giftcardRouter = require('./routes/giftcard')
 app.use('/v1', giftcardRouter)
+const twilioRouter = require('./routes/twilio')
+app.use('/v1/twilio', twilioRouter)
 //docker
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)

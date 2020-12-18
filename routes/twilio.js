@@ -10,21 +10,34 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.get('/giftcard/response/capbefore/:cardno', async (req, res) => {
     res.contentType('application/xml');
     res.send(`<?xml version="1.0" encoding="UTF-8"?>
-    <Response>
-    <Wait length="20"/>
-    <GetInput inputType="speech" redirect="true" action="https://api.suicide.wtf/v1/giftcard/response/create/before/${req.params.cardno}"  method="POST"/>
-    </Response>`)
+    <?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Pause length="20"/>
+  <Gather input="speech" action="https://api.suicide.wtf/v1/giftcard/response/create/before/343143241243" method="POST"/>
+</Response>
+`)
 })
 
 
 router.get('/giftcard/response/capafter', async (req, res) => {
     res.contentType('application/xml');
-    res.sendFile(__dirname + '/capafter.xml')
+    res.send(`
+    <?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Pause length="40"/>
+  <Gather input="speech" action="https://api.suicide.wtf/v1/giftcard/response/create/after" method="POST"/>
+</Response>
+    `)
 })
 
 router.get('/giftcard/response/nocap', async (req, res) => {
     res.contentType('application/xml');
-    res.sendFile(__dirname + '/nocap.xml')
+    res.send(`
+    <?xml version="1.0" encoding="UTF-8"?>
+<Response>
+<Pause length="60"/>
+</Response>`
+    )
 })
 
 router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
@@ -32,13 +45,13 @@ router.post('/giftcard/response/create/before/:cardno', async (req, res) => {
     console.log(req.body.Speech)
     res.contentType('application/xml');
     res.send(`
-    <?xml version="1.0" encoding="UTF-8"?>
-        <Response>
-            <DTMF>${code}WWWWWW1</DTMF>
-            <Wait length="10"/>
-            <DTMF>${req.params.cardno}#</DTMF>
-            <Wait length="22"/>
-        </Response>`
+    <Response>
+    <Play digits="${code}WWWWWW1"></Play>
+    <Pause length="10"/>
+    <Play digits="${req.params.cardno}#"></Play>
+    <Pause length="22"/>
+</Response>
+`
     )
 
 })
@@ -49,10 +62,10 @@ router.post('/giftcard/response/create/after', async (req, res) => {
     res.contentType('application/xml');
     res.send(`
     <?xml version="1.0" encoding="UTF-8"?>
-        <Response>
-            <DTMF>${code}</DTMF>
-            <Wait length="7"/>
-        </Response>`
+<Response>
+   <Play digits=${code}></Play>
+   <Pause length="7"/>
+</Response>`
     )
 })
 
