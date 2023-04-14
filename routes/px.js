@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 let PX = require('../models/px')
 
+router.use(express.text());
 router.get('/px/all', async (req, res) => {
     try {
         const d = await PX.find()
@@ -22,6 +23,7 @@ router.get('/px/all', async (req, res) => {
 })
 
 router.post('/px/new', async (req, res) => {
+    req.body = JSON.parse(req.body)
     try {
         const newPX = await PX.create({
             payload: req.body.payload,
@@ -40,7 +42,7 @@ router.post('/px/new', async (req, res) => {
         res.status(400).json({
             status: "ERROR",
             data: {
-                error: e.msg
+                error: e
             }
         })
     }
