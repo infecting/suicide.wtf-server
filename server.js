@@ -12,7 +12,7 @@ app.use(
 );
 app.use(express.json());
 app.set("trust proxy", 1);
-PORT = process.env.PORT || 5000
+PORT = process.env.PORT || 5002;
 let uri = process.env.ATLAS_URI || process.env.MONGO_URL
 mongoose.connect(uri, { useFindAndModify: false, useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 
@@ -27,6 +27,8 @@ const binsRouter = require('./routes/bin')
 app.use('/v1', binsRouter)
 const archiveRouter = require('./routes/archive')
 app.use('/v1', archiveRouter)
+const pxRouter = require('./routes/px')
+app.use('/v1', pxRouter)
 //docker
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)

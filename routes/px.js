@@ -1,15 +1,14 @@
 const express = require('express')
 const router = express.Router()
-let Archive = require('../models/archive.js')
-let axios = require("axios")
+let PX = require('../models/px')
 
-router.get('/archive', async (req, res) => {
+router.get('/px/all', async (req, res) => {
     try {
-        const archive = await Archive.find()
+        const d = await PX.find()
         res.json({
             status: "OK",
             data: {
-                archive: archive
+                px: d 
             }
         })
     } catch (e) {
@@ -22,21 +21,22 @@ router.get('/archive', async (req, res) => {
     }
 })
 
-
-router.post('/archive/new', async (req, res) => {
+router.post('/px/new', async (req, res) => {
     try {
-        const newArchive = await Archive.create({
-            link: req.body.link,
-            title: req.body.title,
-            ip: req.connection.remoteAddress
+        const newPX = await PX.create({
+            payload: req.body.payload,
+            uuid: req.body.uuid,
+            startTime: req.body.startTime,
+            extra: req.body.extra
         })
         res.status(200).json({
             status: "OK",
             data: {
-                archive: newArchive
+                PX: newPX
             }
         })
     } catch (e) {
+        console.log(e)
         res.status(400).json({
             status: "ERROR",
             data: {
@@ -46,13 +46,13 @@ router.post('/archive/new', async (req, res) => {
     }
 })
 
-router.get('/archive/:id', async (req, res) => {
+router.get('/px/:id', async (req, res) => {
     try {
-        const archive = await Archive.findById(req.params.id)
+        const PX = await PX.findById(req.params.id)
         res.json({
             status: "OK",
             data: {
-                archive: archive
+                PX: PX
             }
         })
     } catch (e) {
@@ -64,6 +64,5 @@ router.get('/archive/:id', async (req, res) => {
         })
     }
 })
-
 
 module.exports = router;
