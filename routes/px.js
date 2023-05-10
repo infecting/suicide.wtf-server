@@ -3,6 +3,27 @@ const router = express.Router()
 let PX = require('../models/px')
 
 router.use(express.text());
+
+router.get('/px/tls', async (req, res) => {
+    if (req.secure) {
+        // Retrieve TLS-related information
+        const cipher = req.socket.getCipher();
+        const protocol = req.socket.getProtocol();
+    
+        // Construct the JA3 fingerprint
+        const ja3Fingerprint = `${cipher.name}-${protocol}`;
+    
+        // Calculate the JA3 hash
+        const ja3Hash = crypto.createHash('md5').update(ja3Fingerprint).digest('hex');
+    
+        // Return the JA3 hash as the response
+        res.json({hash: ja3Hash, cipher: cipher, protocol: protocol, fingerprint: ja3Fingerprint});
+      } else {
+        // Return an error response if the request is not using TLS
+        res.status(400).send('TLS connection required');
+      }
+ });  
+
 router.get('/px/all', async (req, res) => {
     try {
         const d = await PX.find()
